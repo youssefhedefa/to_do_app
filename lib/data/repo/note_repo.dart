@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:hive/hive.dart';
-import 'package:to_do_app/constances/box_constance.dart';
-import 'package:to_do_app/model/note_model.dart';
+import 'package:to_do_app/data/model/note_model.dart';
+import 'package:to_do_app/utils/constances/box_constance.dart';
 
 class NoteRepo {
 

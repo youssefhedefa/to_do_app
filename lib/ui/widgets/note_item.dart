@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:to_do_app/helper/color_helper.dart';
-import 'package:to_do_app/helper/text_style_helper.dart';
-import 'package:to_do_app/model/note_model.dart';
+import 'package:to_do_app/data/model/note_model.dart';
+import 'package:to_do_app/utils/helper/color_helper.dart';
+import 'package:to_do_app/utils/helper/text_style_helper.dart';
 
 class NoteItem extends StatelessWidget {
   const NoteItem({super.key, required this.note});
