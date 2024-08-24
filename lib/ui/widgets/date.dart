@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:to_do_app/helper/color_helper.dart';
-import 'package:to_do_app/helper/text_style_helper.dart';
-import 'package:to_do_app/providers/add_note_provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:to_do_app/logic/add_note_cubit/add_note_cubit.dart';
+import 'package:to_do_app/logic/add_note_cubit/add_note_states.dart';
+import 'package:to_do_app/utils/helper/color_helper.dart';
+import 'package:to_do_app/utils/helper/text_style_helper.dart';
 import 'package:to_do_app/ui/widgets/custom_button.dart';
 
 class CustomDatePicker extends StatelessWidget {
@@ -25,17 +26,27 @@ class CustomDatePicker extends StatelessWidget {
                 DateTime dateTime = DateTime.parse(value.toString());
                 String formattedDate =
                     '${dateTime.year}-${dateTime.month.toString().padLeft(2, '0')}-${dateTime.day.toString().padLeft(2, '0')}';
-                context
-                    .read<AddNoteProvider>()
-                    .setDateController(formattedDate);
+                context.read<AddNoteCubit>().changeDate(
+                  date: formattedDate,
+                );
               },
             );
           },
         ),
         const Spacer(),
-        Text(
-          context.watch<AddNoteProvider>().dateController,
-          style: AppTextStyleHelper.font18GreyRegular,
+        BlocBuilder<AddNoteCubit,AddNoteState>(
+          builder: (context,state) {
+            if(state is ChangeDate) {
+              return Text(
+                state.date,
+                style: AppTextStyleHelper.font18GreyRegular,
+              );
+            }
+            return Text(
+              'No date selected',
+              style: AppTextStyleHelper.font18GreyRegular,
+            );
+          }
         ),
       ],
     );

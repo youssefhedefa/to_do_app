@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:to_do_app/helper/color_helper.dart';
-import 'package:to_do_app/helper/text_style_helper.dart';
-import 'package:to_do_app/model/note_model.dart';
+import 'package:to_do_app/data/model/note_model.dart';
+import 'package:to_do_app/utils/helper/color_helper.dart';
+import 'package:to_do_app/utils/helper/text_style_helper.dart';
 
 class NoteItem extends StatelessWidget {
   const NoteItem({super.key, required this.note});
@@ -13,7 +13,13 @@ class NoteItem extends StatelessWidget {
     return Dismissible(
       key: UniqueKey(),
       onDismissed: (direction) {
-        print('Dismissed');
+        note.delete().then((value) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('Note deleted'),
+            ),
+          );
+        });
       },
       direction: DismissDirection.startToEnd,
       background: Container(
