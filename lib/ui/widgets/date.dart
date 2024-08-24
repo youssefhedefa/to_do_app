@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:to_do_app/helper/color_helper.dart';
 import 'package:to_do_app/helper/text_style_helper.dart';
+import 'package:to_do_app/providers/add_note_provider.dart';
 import 'package:to_do_app/ui/widgets/custom_button.dart';
 
 class CustomDatePicker extends StatelessWidget {
@@ -16,14 +18,23 @@ class CustomDatePicker extends StatelessWidget {
           onPressed: () {
             showDatePicker(
               context: context,
-              firstDate: DateTime(2021),
-              lastDate: DateTime(2025),
-            ).then((value) => print(value));
+              firstDate: DateTime.now(),
+              lastDate: DateTime(2026),
+            ).then(
+              (value) {
+                DateTime dateTime = DateTime.parse(value.toString());
+                String formattedDate =
+                    '${dateTime.year}-${dateTime.month.toString().padLeft(2, '0')}-${dateTime.day.toString().padLeft(2, '0')}';
+                context
+                    .read<AddNoteProvider>()
+                    .setDateController(formattedDate);
+              },
+            );
           },
         ),
         const Spacer(),
         Text(
-          'Date: 2024-09-01',
+          context.watch<AddNoteProvider>().dateController,
           style: AppTextStyleHelper.font18GreyRegular,
         ),
       ],
