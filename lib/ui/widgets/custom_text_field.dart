@@ -1,17 +1,26 @@
 import 'package:flutter/material.dart';
 
 class CustomTextField extends StatelessWidget {
-  const CustomTextField({super.key, required this.hintText, required this.isMultiline});
+  const CustomTextField({super.key, required this.hintText, required this.isMultiline, required this.controller, required this.validatorText});
 
   final String hintText;
   final bool isMultiline;
+  final TextEditingController controller;
+  final String validatorText;
 
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
+    return TextFormField(
       cursorColor: Colors.grey,
       maxLines: isMultiline ? null : 1,
+      controller: controller,
+      validator: (value) {
+        if (value!.isEmpty) {
+          return 'Please enter your note $validatorText';
+        }
+        return null;
+      },
       decoration: InputDecoration(
         hintText: hintText,
         hintStyle: const TextStyle(

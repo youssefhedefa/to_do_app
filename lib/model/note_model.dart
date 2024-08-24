@@ -1,7 +1,17 @@
-class NoteModel{
-  final String title;
-  final String date;
-  final String note;
+import 'package:hive/hive.dart';
 
-  NoteModel({required this.title, required this.date, required this.note});
+part 'note_model.g.dart';
+
+@HiveType(typeId: 0)
+class NoteModel{
+  @HiveField(0)
+  final String title;
+  @HiveField(1)
+  final String date;
+  @HiveField(2)
+  final String note;
+  @HiveField(3)
+  final int id;
+
+  NoteModel({required this.id,required this.title, required this.date, required this.note});
 }

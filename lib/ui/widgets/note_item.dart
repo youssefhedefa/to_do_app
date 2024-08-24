@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:to_do_app/helper/color_helper.dart';
 import 'package:to_do_app/helper/text_style_helper.dart';
+import 'package:to_do_app/model/note_model.dart';
 
 class NoteItem extends StatelessWidget {
-  const NoteItem({super.key});
+  const NoteItem({super.key, required this.note});
+
+  final NoteModel note;
 
   @override
   Widget build(BuildContext context) {
@@ -29,6 +32,7 @@ class NoteItem extends StatelessWidget {
         ),
       ),
       child: Container(
+        width: double.infinity,
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
           color: AppColorHelper.darkPrimaryColor,
@@ -46,14 +50,14 @@ class NoteItem extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  'title',
+                Text(
+                  note.title,
                   style: AppTextStyleHelper.font28WhiteBold,
                 ),
-                Text('date', style: AppTextStyleHelper.font18GreyRegular),
+                Text(note.date, style: AppTextStyleHelper.font18GreyRegular),
                 const SizedBox(height: 8),
                 Text(
-                  'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book ',
+                  note.note,
                   style: AppTextStyleHelper.font18GreyRegular,
                 ),
               ],
