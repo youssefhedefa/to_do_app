@@ -24,4 +24,16 @@ class NoteRepo {
       return Left(error.toString());
     }
   }
+
+  Future<Either<String, bool>> deleteNote({
+    required int id,
+  }) async {
+    try {
+      var notesBox = Hive.box<NoteModel>(AppBoxsConstance.noteBox);
+      await notesBox.delete(id);
+      return const Right(true);
+    } catch (error) {
+      return Left(error.toString());
+    }
+  }
 }

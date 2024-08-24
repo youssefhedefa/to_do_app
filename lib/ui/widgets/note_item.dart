@@ -13,7 +13,13 @@ class NoteItem extends StatelessWidget {
     return Dismissible(
       key: UniqueKey(),
       onDismissed: (direction) {
-        print('Dismissed');
+        note.delete().then((value) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('Note deleted'),
+            ),
+          );
+        });
       },
       direction: DismissDirection.startToEnd,
       background: Container(
