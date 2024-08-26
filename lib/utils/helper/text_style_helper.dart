@@ -18,4 +18,9 @@ abstract class AppTextStyleHelper {
     color: Colors.grey[300],
     fontSize: 18,
   );
+
+  static TextStyle font18WhiteRegular = const TextStyle(
+    color: Colors.white,
+    fontSize: 18,
+  );
 }
